@@ -1,12 +1,13 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TaskManager {
     int counter = 0;
-    private final HashMap<Integer, Task> tasks = new HashMap<>();
-    private final HashMap<Integer, Epic> epics = new HashMap<>();
-    private final HashMap<Integer, Subtask> subtasks = new HashMap<>();
+    private final Map<Integer, Task> tasks = new HashMap<>();
+    private final Map<Integer, Epic> epics = new HashMap<>();
+    private final Map<Integer, Subtask> subtasks = new HashMap<>();
 
     public int generateId(){
         return ++counter;
@@ -39,7 +40,6 @@ public class TaskManager {
     public void updateEpicStatus(int epicId) {
         Epic epic = epics.get(epicId);
         if(epic == null || epic.getSubtaskIds().isEmpty()) {
-            epic.setStatus(Status.NEW);
             return;
         }
         boolean allDone = true;
@@ -64,13 +64,13 @@ public class TaskManager {
         }
     }
 
-    public ArrayList<Task> getAllTasks() {
+    public List<Task> getAllTasks() {
         return new ArrayList<>(tasks.values());
     }
-    public ArrayList<Epic> getAllEpics(){
+    public List<Epic> getAllEpics(){
         return new ArrayList<>(epics.values());
     }
-    public ArrayList<Subtask>  getAllSubtasks(){
+    public List<Subtask>  getAllSubtasks(){
         return new ArrayList<>(subtasks.values());
     }
     public void deleteTaskById(int id){
