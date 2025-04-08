@@ -5,7 +5,7 @@ import model.Task;
 
 public class Main {
     public static void main(String[] args) {
-        TaskManager manager =  Managers.getDefault();
+        TaskManager manager = Managers.getDefault();
 
         Task task = new Task(manager.generateId(), "Переезд", "Организовать переезд", Status.NEW);
         Task task1 = new Task(manager.generateId(), "Покушать", "Приготовить", Status.NEW);

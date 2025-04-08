@@ -101,7 +101,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void deleteSubtask(int id) {
-        if(subtasks.containsKey(id)) {
+        if (subtasks.containsKey(id)) {
             Subtask subtask = subtasks.get(id);
             int epicId = subtask.getEpicId();
             subtasks.remove(id);
@@ -115,8 +115,8 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void deleteEpic(int id) {
-        if(epics.containsKey(id)) {
-            for(int subtaskId:  epics.get(id).getSubtaskIds()) {
+        if (epics.containsKey(id)) {
+            for (int subtaskId : epics.get(id).getSubtaskIds()) {
                 subtasks.remove(subtaskId);
             }
             epics.remove(id);

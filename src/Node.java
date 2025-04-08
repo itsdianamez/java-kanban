@@ -1,6 +1,6 @@
 import model.Task;
 
-public class Node <T> {
+public class Node<T> {
     public Node<T> next;
     public Node<T> prev;
     Task task;
