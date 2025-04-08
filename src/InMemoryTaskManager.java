@@ -13,7 +13,7 @@ public class InMemoryTaskManager implements TaskManager {
         return historyManager;
     }
 
-    private HistoryManager historyManager;
+    private final HistoryManager historyManager;
     private int idCounter = 0;
 
 
