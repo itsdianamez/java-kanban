@@ -16,6 +16,4 @@ public class Node <T> {
         this.prev = prev;
         this.task = task;
     }
-
-
 }

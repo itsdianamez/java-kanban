@@ -8,19 +8,18 @@ List<Integer> subtaskId = new ArrayList<>();
 
     public Epic(int id, String taskName, String description) {
         super(id, taskName, description, Status.NEW);
-
     }
 
-    public void addSubtask(int subtaskId){
+    public void addSubtask(int subtaskId) {
        this.subtaskId.add(subtaskId);
     }
 
 
-    public void removeSubtask(int subtaskId){
+    public void removeSubtask(int subtaskId) {
         this.subtaskId.remove(subtaskId);
     }
 
-    public List<Integer> getSubtaskIds(){
+    public List<Integer> getSubtaskIds() {
         return subtaskId;
     }
 }
