@@ -6,6 +6,13 @@ public class Subtask extends Task {
         return epicId;
     }
 
+    @Override
+    public String toString() {
+        return "Subtask{" +
+                "epicId=" + epicId +
+                '}';
+    }
+
     int epicId;
 
     public Subtask(int id, String taskName, String description, Status status, int epicId) {

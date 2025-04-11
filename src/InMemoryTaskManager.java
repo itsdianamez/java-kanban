@@ -1,8 +1,13 @@
 import model.Epic;
+import model.Status;
 import model.Subtask;
 import model.Task;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 public class InMemoryTaskManager implements TaskManager {
     private Map<Integer, Task> tasks = new HashMap<>();
@@ -71,6 +76,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void createSubtask(Subtask subtask) {
         subtasks.put(subtask.getId(), subtask);
+        updateEpicStatus(subtask.getEpicId());
     }
 
     @Override
@@ -86,6 +92,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void updateSubtask(Subtask subtask) {
         subtasks.put(subtask.getId(), subtask);
+        updateEpicStatus(subtask.getEpicId());
     }
 
     @Override
@@ -109,8 +116,9 @@ public class InMemoryTaskManager implements TaskManager {
             if (epic != null) {
                 epic.getSubtaskIds().remove(Integer.valueOf(id));
             }
-
+            updateEpicStatus(epicId);
         }
+
     }
 
     @Override
@@ -132,4 +140,32 @@ public class InMemoryTaskManager implements TaskManager {
     public int generateId() {
         return ++idCounter;
     }
+
+    @Override
+    public void updateEpicStatus(int epicId) {
+        Epic epic = epics.get(epicId);
+        if (epic == null || epic.getSubtaskIds().isEmpty()) {
+            return;
+        }
+        boolean allDone = true;
+        boolean anyInProgress = false;
+
+        for (int id : epic.getSubtaskIds()) {
+            Status subtaskStatus = subtasks.get(id).getStatus();
+            if (subtaskStatus != Status.DONE) {
+                allDone = false;
+            }
+            if (subtaskStatus == Status.IN_PROGRESS) {
+                anyInProgress = true;
+            }
+        }
+        if (allDone) {
+            epic.setStatus(Status.DONE);
+        } else if (anyInProgress) {
+            epic.setStatus(Status.IN_PROGRESS);
+        } else {
+            epic.setStatus(Status.NEW);
+        }
+    }
+
 }

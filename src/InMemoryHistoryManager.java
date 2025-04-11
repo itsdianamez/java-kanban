@@ -39,7 +39,7 @@ public class InMemoryHistoryManager implements HistoryManager {
         return getTasks();
     }
 
-    public void linkLast(Task task) {
+    private void linkLast(Task task) {
         Node node = new Node(task);
         if (head == null) {
             head = node;
@@ -85,3 +85,22 @@ public class InMemoryHistoryManager implements HistoryManager {
 
 
 }
+
+class Node<T> {
+    public Node<T> next;
+    public Node<T> prev;
+    Task task;
+
+    public Node(Task task) {
+        this.task = task;
+        next = null;
+        prev = null;
+    }
+
+    public Node(Node<T> next, Node<T> prev, Task task) {
+        this.next = next;
+        this.prev = prev;
+        this.task = task;
+    }
+}
+

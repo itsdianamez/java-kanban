@@ -35,7 +35,9 @@ public interface TaskManager {
 
     void deleteEpic(int id);
 
-    public List<Task> getHistory();
+    List<Task> getHistory();
 
-    public int generateId();
+    int generateId();
+
+    void updateEpicStatus(int epicId);
 }

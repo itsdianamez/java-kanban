@@ -61,7 +61,7 @@ public class InMemoryHistoryManagerTest {
 
     @Test
     void shouldAddFirstTaskToEmptyHistory() {
-        historyManager.linkLast(task1);
+        historyManager.add(task1);
 
         List<Task> history = historyManager.getHistory();
         assertEquals(1, history.size());
@@ -71,9 +71,9 @@ public class InMemoryHistoryManagerTest {
 
     @Test
     void shouldAddTaskToEndOfNonEmptyHistory() {
-        historyManager.linkLast(task1);
-        historyManager.linkLast(task2);
-        historyManager.linkLast(task3);
+        historyManager.add(task1);
+        historyManager.add(task2);
+        historyManager.add(task3);
 
         List<Task> history = historyManager.getHistory();
         assertEquals(3, history.size());
@@ -86,10 +86,10 @@ public class InMemoryHistoryManagerTest {
     void shouldIncrementSize() {
         assertEquals(0, historyManager.getHistory().size());
 
-        historyManager.linkLast(task1);
+        historyManager.add(task1);
         assertEquals(1, historyManager.getHistory().size());
 
-        historyManager.linkLast(task2);
+        historyManager.add(task2);
         assertEquals(2, historyManager.getHistory().size());
     }
 
@@ -103,9 +103,9 @@ public class InMemoryHistoryManagerTest {
 
     @Test
     void shouldReturnAllTasksInCorrectOrder() {
-        historyManager.linkLast(task1);
-        historyManager.linkLast(task2);
-        historyManager.linkLast(task3);
+        historyManager.add(task1);
+        historyManager.add(task2);
+        historyManager.add(task3);
 
         List<Task> tasks = historyManager.getTasks();
 
@@ -117,8 +117,8 @@ public class InMemoryHistoryManagerTest {
 
     @Test
     void shouldReturnEmptyListAfterClearingHistory() {
-        historyManager.linkLast(task1);
-        historyManager.linkLast(task2);
+        historyManager.add(task1);
+        historyManager.add(task2);
 
         historyManager.remove(task1.getId());
         historyManager.remove(task2.getId());
@@ -130,7 +130,7 @@ public class InMemoryHistoryManagerTest {
 
     @Test
     void shouldRemoveSingleNodeFromList() {
-        historyManager.linkLast(task1);
+        historyManager.add(task1);
         historyManager.remove(task1.getId());
 
         assertNull(historyManager.getHead());
@@ -141,9 +141,9 @@ public class InMemoryHistoryManagerTest {
 
     @Test
     void shouldRemoveFirstNodeFromList() {
-        historyManager.linkLast(task1);
-        historyManager.linkLast(task2);
-        historyManager.linkLast(task3);
+        historyManager.add(task1);
+        historyManager.add(task2);
+        historyManager.add(task3);
 
         historyManager.remove(task1.getId());
 
@@ -155,9 +155,9 @@ public class InMemoryHistoryManagerTest {
 
     @Test
     void shouldRemoveLastNodeFromList() {
-        historyManager.linkLast(task1);
-        historyManager.linkLast(task2);
-        historyManager.linkLast(task3);
+        historyManager.add(task1);
+        historyManager.add(task2);
+        historyManager.add(task3);
 
         historyManager.remove(task3.getId());
 
@@ -169,9 +169,9 @@ public class InMemoryHistoryManagerTest {
 
     @Test
     void shouldRemoveMiddleNodeFromList() {
-        historyManager.linkLast(task1);
-        historyManager.linkLast(task2);
-        historyManager.linkLast(task3);
+        historyManager.add(task1);
+        historyManager.add(task2);
+        historyManager.add(task3);
 
         historyManager.remove((task2.getId()));
 
